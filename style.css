@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    background-color: black;
+}
+
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#game {
+    display: flex;
+    flex-wrap: wrap;
+    width: 450px;
+    background-color: black;
+}
+
+.wall {
+    width: 50px;
+    height: 50px;
+    background-color: blue;
+    border: 1px solid black;
+}
+
+.ground {
+    width: 50px;
+    height: 50px;
+    background-color: black;
+}
+
+.coin {
+    width: 50px;
+    height: 50px;
+    background-color: black;
+}
+
+.coin::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    margin-top: 20px;
+    margin-left: 20px;
+    background-color: yellow;
+    border-radius: 50%;
+}
+
+#pacman {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: gold;
+    border-radius: 50%;
+}
