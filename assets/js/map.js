@@ -1,6 +1,4 @@
-import { assets } from "./assets.js"
-
-// init new game
+// init map
 export const initMap = () => {
     return [
         [1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -36,9 +34,9 @@ export const draw = {
     },
     // pacman #3
     pacman() {
-        const el = document.createElement('div')
-        el.setAttribute('id', 'pacman')
-        el.textContent = assets.pacman.score
-        game.appendChild(el)
+        const pacman = document.createElement('div')
+        pacman.setAttribute('id', 'pacman')
+        pacman.setAttribute('class', 'pacman-right')
+        game.appendChild(pacman)
     },
 }
