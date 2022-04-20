@@ -1,7 +1,9 @@
 import { assets } from "./assets.js"
 import { initMap } from "./map.js"
 import { drawMap } from './main.js'
+import { sfx } from "./sfx.js"
 
+// score table
 const scoreView = document.getElementById('score')
 
 // map x:9[0-8] x y:5[0-4] (x50px)
@@ -14,9 +16,11 @@ const controller = {
         if (map[assets.pacman.y - 1][assets.pacman.x] !== assets.wall.id) {
             if (map[assets.pacman.y - 1][assets.pacman.x] !== assets.ground.id) {
                 --coinN
+                map[assets.pacman.y][assets.pacman.x] = assets.coin.id ? sfx.coin().play() : null
                 assets.pacman.score += assets.pacman.scoreInc
                 scoreView.textContent = `HIGH SCORE ${assets.pacman.score}`
             }
+            sfx.chomp().play()
             map[assets.pacman.y][assets.pacman.x] = assets.ground.id
             assets.pacman.y -= 1
             map[assets.pacman.y][assets.pacman.x] = assets.pacman.id
@@ -29,9 +33,12 @@ const controller = {
         if (map[assets.pacman.y + 1][assets.pacman.x] !== assets.wall.id) {
             if (map[assets.pacman.y + 1][assets.pacman.x] !== assets.ground.id) {
                 --coinN
+                map[assets.pacman.y][assets.pacman.x] = assets.coin.id ? sfx.coin().play() : null
                 assets.pacman.score += assets.pacman.scoreInc
                 scoreView.textContent = `HIGH SCORE ${assets.pacman.score}`
             }
+            sfx.chomp().play()
+            map[assets.pacman.y][assets.pacman.x] === assets.coin.id ? sfx.coin().play() : null
             map[assets.pacman.y][assets.pacman.x] = assets.ground.id
             assets.pacman.y += 1
             map[assets.pacman.y][assets.pacman.x] = assets.pacman.id
@@ -44,9 +51,12 @@ const controller = {
         if (map[assets.pacman.y][assets.pacman.x - 1] !== assets.wall.id) {
             if (map[assets.pacman.y][assets.pacman.x - 1] !== assets.ground.id) {
                 --coinN
+                map[assets.pacman.y][assets.pacman.x] = assets.coin.id ? sfx.coin().play() : null
                 assets.pacman.score += assets.pacman.scoreInc
                 scoreView.textContent = `HIGH SCORE ${assets.pacman.score}`
             }
+            sfx.chomp().play()
+            map[assets.pacman.y][assets.pacman.x] === assets.coin.id ? sfx.coin().play() : null
             map[assets.pacman.y][assets.pacman.x] = assets.ground.id
             assets.pacman.x -= 1
             map[assets.pacman.y][assets.pacman.x] = assets.pacman.id
@@ -59,9 +69,12 @@ const controller = {
         if (map[assets.pacman.y][assets.pacman.x + 1] !== assets.wall.id) {
             if (map[assets.pacman.y][assets.pacman.x + 1] !== assets.ground.id) {
                 --coinN
+                map[assets.pacman.y][assets.pacman.x] = assets.coin.id ? sfx.coin().play() : null
                 assets.pacman.score += assets.pacman.scoreInc
                 scoreView.textContent = `HIGH SCORE ${assets.pacman.score}`
             }
+            sfx.chomp().play()
+            map[assets.pacman.y][assets.pacman.x] === assets.coin.id ? sfx.coin().play() : null
             map[assets.pacman.y][assets.pacman.x] = assets.ground.id
             assets.pacman.x += 1
             map[assets.pacman.y][assets.pacman.x] = assets.pacman.id
