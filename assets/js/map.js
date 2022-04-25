@@ -12,7 +12,7 @@ export const initMap = () => {
         [1, 1, 1, 1, 1, 1, 1, 1, 1],
     ]
 }
-
+// DOM element game
 export const draw = {
     // ground #0
     ground() {

@@ -6,32 +6,16 @@ import { sfx } from "./sfx.js"
 // score table
 const scoreView = document.getElementById('score')
 
-// map x:9[0-8] x y:5[0-4] (x50px)
+// map x:9[0-8] x y:5[0-4] 
 let map = initMap()
 // count coins
 let coinN = map.flat().filter(v => v === 2).length
 // controller movement
 const controller = {
-    up() {
-        if (map[assets.pacman.y - 1][assets.pacman.x] !== assets.wall.id) {
-            if (map[assets.pacman.y - 1][assets.pacman.x] !== assets.ground.id) {
-                --coinN
-                map[assets.pacman.y][assets.pacman.x] = assets.coin.id ? sfx.coin().play() : null
-                assets.pacman.score += assets.pacman.scoreInc
-                scoreView.textContent = `HIGH SCORE ${assets.pacman.score}`
-            }
-            sfx.chomp().play()
-            map[assets.pacman.y][assets.pacman.x] = assets.ground.id
-            assets.pacman.y -= 1
-            map[assets.pacman.y][assets.pacman.x] = assets.pacman.id
-            drawMap()
-            pacman.setAttribute('class', 'pacman-up')
-            checkEndgame()
-        }
-    },
-    down() {
-        if (map[assets.pacman.y + 1][assets.pacman.x] !== assets.wall.id) {
-            if (map[assets.pacman.y + 1][assets.pacman.x] !== assets.ground.id) {
+    checkMove(y, x, className) {
+        console.log(assets.pacman.y)
+        if (map[y][x] !== assets.wall.id) {
+            if (map[y][x] !== assets.ground.id) {
                 --coinN
                 map[assets.pacman.y][assets.pacman.x] = assets.coin.id ? sfx.coin().play() : null
                 assets.pacman.score += assets.pacman.scoreInc
@@ -40,46 +24,11 @@ const controller = {
             sfx.chomp().play()
             map[assets.pacman.y][assets.pacman.x] === assets.coin.id ? sfx.coin().play() : null
             map[assets.pacman.y][assets.pacman.x] = assets.ground.id
-            assets.pacman.y += 1
+            assets.pacman.x = x
+            assets.pacman.y = y
             map[assets.pacman.y][assets.pacman.x] = assets.pacman.id
             drawMap()
-            pacman.setAttribute('class', 'pacman-down')
-            checkEndgame()
-        }
-    },
-    left() {
-        if (map[assets.pacman.y][assets.pacman.x - 1] !== assets.wall.id) {
-            if (map[assets.pacman.y][assets.pacman.x - 1] !== assets.ground.id) {
-                --coinN
-                map[assets.pacman.y][assets.pacman.x] = assets.coin.id ? sfx.coin().play() : null
-                assets.pacman.score += assets.pacman.scoreInc
-                scoreView.textContent = `HIGH SCORE ${assets.pacman.score}`
-            }
-            sfx.chomp().play()
-            map[assets.pacman.y][assets.pacman.x] === assets.coin.id ? sfx.coin().play() : null
-            map[assets.pacman.y][assets.pacman.x] = assets.ground.id
-            assets.pacman.x -= 1
-            map[assets.pacman.y][assets.pacman.x] = assets.pacman.id
-            drawMap()
-            pacman.setAttribute('class', 'pacman-left')
-            checkEndgame()
-        }
-    },
-    right() {
-        if (map[assets.pacman.y][assets.pacman.x + 1] !== assets.wall.id) {
-            if (map[assets.pacman.y][assets.pacman.x + 1] !== assets.ground.id) {
-                --coinN
-                map[assets.pacman.y][assets.pacman.x] = assets.coin.id ? sfx.coin().play() : null
-                assets.pacman.score += assets.pacman.scoreInc
-                scoreView.textContent = `HIGH SCORE ${assets.pacman.score}`
-            }
-            sfx.chomp().play()
-            map[assets.pacman.y][assets.pacman.x] === assets.coin.id ? sfx.coin().play() : null
-            map[assets.pacman.y][assets.pacman.x] = assets.ground.id
-            assets.pacman.x += 1
-            map[assets.pacman.y][assets.pacman.x] = assets.pacman.id
-            drawMap()
-            pacman.setAttribute('class', 'pacman-right')
+            pacman.setAttribute('class', className)
             checkEndgame()
         }
     }
@@ -99,23 +48,38 @@ function checkEndgame() {
         scoreView.textContent = 'HIGH SCORE 0'
     }
 }
-//  controller key
+//  control key
+let y = null
+let x = null
+let className = null
 document.addEventListener('keydown', ({ key }) => {
     switch (key) {
         case "ArrowUp":
-            controller.up()
+            y = assets.pacman.y - 1
+            x = assets.pacman.x
+            className = 'pacman-up'
+            controller.checkMove(y, x, className)
             break;
         case "ArrowDown":
-            controller.down()
+            y = assets.pacman.y + 1
+            x = assets.pacman.x
+            className = 'pacman-down'
+            controller.checkMove(y, x, className)
             break;
         case "ArrowLeft":
-            controller.left()
+            y = assets.pacman.y
+            x = assets.pacman.x - 1
+            className = 'pacman-left'
+            controller.checkMove(y, x, className)
             break;
         case "ArrowRight":
-            controller.right()
+            y = assets.pacman.y
+            x = assets.pacman.x + 1
+            className = 'pacman-right'
+            controller.checkMove(y, x, className)
             break;
         default:
     }
 });
 
-export { map, controller }
+export { map }
