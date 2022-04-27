@@ -13,7 +13,6 @@ let coinN = map.flat().filter(v => v === 2).length
 // controller movement
 const controller = {
     checkMove(y, x, className) {
-        console.log(assets.pacman.y)
         if (map[y][x] !== assets.wall.id) {
             if (map[y][x] !== assets.ground.id) {
                 --coinN
