@@ -4,7 +4,7 @@ This is a demo part of the pacman game made entirely with html5, css and javascr
 
 </br>
 
-![Tux, the Linux mascot](./readme.jpg)
+![readme](./readme.jpg)
 
 ## Features
 
